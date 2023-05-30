@@ -1,5 +1,10 @@
 package com.drahovac.nbaplayers.domain
 
+import com.drahovac.nbaplayers.data.PlayersDto
+import com.drahovac.nbaplayers.data.PlayersRepository.Companion.ITEMS_PER_PAGE
+import retrofit2.http.GET
+import retrofit2.http.Query
+
 /**
  * An interface for accessing remote nba players data.
  *
@@ -12,5 +17,9 @@ interface PlayersApi {
      * @param page The page number to retrieve.
      * @return A list of players.
      */
-    suspend fun getPlayers(page: Int): List<Player>
+    @GET("players")
+    suspend fun getPlayers(
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int = ITEMS_PER_PAGE,
+    ): PlayersDto
 }

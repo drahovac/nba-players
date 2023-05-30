@@ -15,7 +15,12 @@ fun TextBody(
     color: Color = Color.Unspecified,
     text: String
 ) {
-    Text(modifier = modifier, text = text, style = MaterialTheme.typography.bodyMedium)
+    Text(
+        modifier = modifier,
+        text = text,
+        style = MaterialTheme.typography.bodyMedium,
+        color = color
+    )
 }
 
 @Composable

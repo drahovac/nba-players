@@ -16,7 +16,7 @@ class PlayersPagingSource(
         val page: Int = params.key ?: 0
 
         return runCatching {
-            val response = playersApi.getPlayers(page)
+            val response = playersApi.getPlayers(page).data
 
             LoadResult.Page(
                 data = response,

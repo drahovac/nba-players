@@ -18,14 +18,17 @@ class PlayersRepository(private val playersApi: PlayersApi) {
      * @return A paginated list of players.
      */
     fun getPlayers(): Pager<Int, Player> = Pager(
-        config = PagingConfig(pageSize = ITEMS_PER_PAGE, prefetchDistance = ITEMS_DISTANCE_BEFORE_LOAD),
+        config = PagingConfig(
+            pageSize = ITEMS_PER_PAGE,
+            prefetchDistance = ITEMS_DISTANCE_BEFORE_LOAD
+        ),
         pagingSourceFactory = {
             PlayersPagingSource(playersApi)
         }
     )
 
-    private companion object {
+    companion object {
         const val ITEMS_PER_PAGE = 35
-        const val ITEMS_DISTANCE_BEFORE_LOAD = 3
+        private const val ITEMS_DISTANCE_BEFORE_LOAD = 3
     }
 }

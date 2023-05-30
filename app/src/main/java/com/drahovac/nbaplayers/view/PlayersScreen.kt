@@ -131,7 +131,7 @@ fun PlayerItem(player: Player) {
                 .padding(8.dp)
                 .fillMaxWidth()
         ) {
-            TextBody(text = "${player.name} ${player.lastName}")
+            TextBody(text = "${player.firstName} ${player.lastName}")
             TextBody(text = "${stringResource(R.string.position)} ${player.position}")
             TextBody(text = "${stringResource(R.string.team)} ${player.team.name}")
         }
