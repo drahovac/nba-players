@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NBA Players</string>
+    <string name="nba_players">NBA players</string>
+    <string name="position">"Position:"</string>
+    <string name="team">"Team:"</string>
+    <string name="retry">Retry</string>
 </resources>
