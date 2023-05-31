@@ -1,13 +1,11 @@
-package com.drahovac.nbaplayers.domain
+package com.drahovac.nbaplayers.data
 
-import com.drahovac.nbaplayers.data.PlayersDto
 import com.drahovac.nbaplayers.data.PlayersRepository.Companion.ITEMS_PER_PAGE
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
  * An interface for accessing remote nba players data.
- *
  */
 interface PlayersApi {
 

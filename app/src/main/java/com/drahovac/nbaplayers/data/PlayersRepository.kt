@@ -3,7 +3,6 @@ package com.drahovac.nbaplayers.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.drahovac.nbaplayers.domain.Player
-import com.drahovac.nbaplayers.domain.PlayersApi
 
 /**
  * A repository for retrieving players from the Players API.

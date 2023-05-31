@@ -3,8 +3,10 @@ package com.drahovac.nbaplayers.data
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.drahovac.nbaplayers.domain.Player
-import com.drahovac.nbaplayers.domain.PlayersApi
 
+/**
+ * A paging source that provides a list of players.
+ */
 class PlayersPagingSource(
     private val playersApi: PlayersApi,
 ) : PagingSource<Int, Player>() {

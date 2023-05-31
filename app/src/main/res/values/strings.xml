@@ -4,4 +4,11 @@
     <string name="position">"Position:"</string>
     <string name="team">"Team:"</string>
     <string name="retry">Retry</string>
+    <string name="error_loading">Error loading data:</string>
+    <string name="height_feet">Height in feet:</string>
+    <string name="height_inches">Height in inches:</string>
+    <string name="weight">Weight in pounds:</string>
+    <string name="unknown">unknown:</string>
+    <string name="player_image">Player image</string>
+    <string name="team_details">Team details</string>
 </resources>
