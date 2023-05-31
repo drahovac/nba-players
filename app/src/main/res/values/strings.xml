@@ -17,4 +17,7 @@
     <string name="team_abbrevation">Abbrevation:</string>
     <string name="team_city">City:</string>
     <string name="team_conference">Conference:</string>
+    <string name="back">Back</string>
+    <string name="player_detail">Player detail</string>
+    <string name="team_detail">Team detail</string>
 </resources>

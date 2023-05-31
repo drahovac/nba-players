@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                     type = NavType.StringType
                 }
                 )) {
-                TeamDetailScreen(it.arguments?.getString(TEAM_ID_PARAM) ?: "")
+                TeamDetailScreen(it.arguments?.getString(TEAM_ID_PARAM) ?: "", navController)
             }
         }
     }

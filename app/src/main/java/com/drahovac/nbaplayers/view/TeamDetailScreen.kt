@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.drahovac.nbaplayers.R
@@ -33,19 +34,25 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun TeamDetailScreen(
     id: String,
+    navController: NavController,
     viewModel: TeamDetailViewModel = getViewModel { parametersOf(id) }
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    TeamScreenContent(state, viewModel::retry)
+    TeamScreenContent(state, viewModel::retry, navController::navigateUp)
 }
 
 @Composable
 private fun TeamScreenContent(
     state: DetailState<TeamDetail>,
     retry: () -> Unit,
+    onBack: () -> Unit,
 ) {
-    DetailScreen(state = state, retry = retry) {
+    DetailScreen(
+        state = state, retry = retry,
+        title = stringResource(id = R.string.team_detail),
+        onBack = onBack
+    ) {
         TeamDetailContent(it)
     }
 }

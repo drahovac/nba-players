@@ -46,7 +46,7 @@ fun PlayerDetailScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    ScreenContent(state, viewModel::retry) {
+    ScreenContent(state, viewModel::retry, navController::navigateUp) {
         navController.navigate(Destination.TeamDetail(it).route) {
             launchSingleTop = true
         }
@@ -57,9 +57,15 @@ fun PlayerDetailScreen(
 private fun ScreenContent(
     state: DetailState<PlayerDetail>,
     retry: () -> Unit,
+    onBack: () -> Unit,
     onTeamClicked: (String) -> Unit
 ) {
-    DetailScreen(state = state, retry = retry) {
+    DetailScreen(
+        state = state,
+        retry = retry,
+        title = stringResource(id = R.string.player_detail),
+        onBack = onBack,
+    ) {
         PlayerDetailContent(it) {
             onTeamClicked(it.detail.team.id)
         }
