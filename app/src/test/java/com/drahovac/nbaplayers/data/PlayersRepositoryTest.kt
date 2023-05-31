@@ -16,7 +16,7 @@ class PlayersRepositoryTest {
         val result = repository.getPlayers().flow.asSnapshot()
 
         assertEquals(35, result.size)
-        assertTrue(result.all { it.team.name == "Team for page 0" })
+        assertTrue(result.all { it.team.name == "Team for page 1" })
     }
 
     @Test
@@ -26,8 +26,8 @@ class PlayersRepositoryTest {
         }
 
         assertEquals(70, result.size)
-        assertTrue(result.subList(0, 34).all { it.team.name == "Team for page 0" })
-        assertTrue(result.subList(35, 66).all { it.team.name == "Team for page 1" })
+        assertTrue(result.subList(0, 34).all { it.team.name == "Team for page 1" })
+        assertTrue(result.subList(35, 66).all { it.team.name == "Team for page 2" })
     }
 
     @Test
@@ -37,6 +37,6 @@ class PlayersRepositoryTest {
         }
 
         assertEquals(35, result.size)
-        assertTrue(result.all { it.team.name == "Team for page 0" })
+        assertTrue(result.all { it.team.name == "Team for page 1" })
     }
 }

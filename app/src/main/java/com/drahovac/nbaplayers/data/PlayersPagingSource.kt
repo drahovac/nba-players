@@ -15,17 +15,17 @@ class PlayersPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Player> {
-        val page: Int = params.key ?: 0
+        // use starting index = 1, api returns same data for page 0 and 1 even when 0 is default api index.
+        val page: Int = params.key ?: 1
 
         return runCatching {
             val response = playersApi.getPlayers(page).data
 
             LoadResult.Page(
                 data = response,
-                prevKey = if (page == 0) null else page.minus(1),
+                prevKey = if (page == 1) null else page.minus(1),
                 nextKey = if (response.isNotEmpty()) page.plus(1) else null
             )
         }.getOrElse { LoadResult.Error(it) }
-
     }
 }
