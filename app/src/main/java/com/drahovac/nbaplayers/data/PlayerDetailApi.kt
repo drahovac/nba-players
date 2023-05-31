@@ -12,8 +12,8 @@ interface PlayerDetailApi {
     /**
      * Gets a detail of player.
      *
-     * @param id The page number to retrieve.
-     * @return A list of players.
+     * @param id of player.
+     * @return A player detail.
      */
     @GET("players/{id}")
     suspend fun getPlayer(

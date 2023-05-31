@@ -2,10 +2,8 @@ package com.drahovac.nbaplayers.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -24,11 +22,11 @@ import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.drahovac.nbaplayers.R
-import com.drahovac.nbaplayers.ui.ErrorView
-import com.drahovac.nbaplayers.ui.LoadingProgress
+import com.drahovac.nbaplayers.domain.PlayerDetail
+import com.drahovac.nbaplayers.ui.DetailScreen
 import com.drahovac.nbaplayers.ui.TextBody
 import com.drahovac.nbaplayers.ui.TextHeadline
-import com.drahovac.nbaplayers.viewModel.PlayerDetailState
+import com.drahovac.nbaplayers.viewModel.DetailState
 import com.drahovac.nbaplayers.viewModel.PlayerDetailViewModel
 import org.koin.androidx.compose.getViewModel
 import org.koin.core.parameter.parametersOf
@@ -57,24 +55,20 @@ fun PlayerDetailScreen(
 
 @Composable
 private fun ScreenContent(
-    state: PlayerDetailState,
+    state: DetailState<PlayerDetail>,
     retry: () -> Unit,
     onTeamClicked: (String) -> Unit
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        when (state) {
-            is PlayerDetailState.Error -> ErrorView(error = state.error, retry)
-            PlayerDetailState.LOADING -> LoadingProgress()
-            is PlayerDetailState.Success -> PlayerDetailContent(state) {
-                onTeamClicked(state.detail.team.id)
-            }
+    DetailScreen(state = state, retry = retry) {
+        PlayerDetailContent(it) {
+            onTeamClicked(it.detail.team.id)
         }
     }
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun PlayerDetailContent(state: PlayerDetailState.Success, onTeamClicked: () -> Unit) {
+fun PlayerDetailContent(state: DetailState.Success<PlayerDetail>, onTeamClicked: () -> Unit) {
     val detail = state.detail
 
     Column(

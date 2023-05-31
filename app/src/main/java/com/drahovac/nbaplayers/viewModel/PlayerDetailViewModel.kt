@@ -3,7 +3,7 @@ package com.drahovac.nbaplayers.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.drahovac.nbaplayers.data.PlayerDetailRepository
-import com.drahovac.nbaplayers.data.PlayerImageUrlAdapter
+import com.drahovac.nbaplayers.data.PlayersUrlAdapter
 import com.drahovac.nbaplayers.domain.PlayerDetail
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,8 +18,8 @@ class PlayerDetailViewModel(
     private val repository: PlayerDetailRepository
 ) : ViewModel() {
 
-    private val _state: MutableStateFlow<PlayerDetailState> =
-        MutableStateFlow(PlayerDetailState.LOADING)
+    private val _state: MutableStateFlow<DetailState<PlayerDetail>> =
+        MutableStateFlow(DetailState.LOADING)
     val state = _state.asStateFlow()
 
     init {
@@ -31,45 +31,16 @@ class PlayerDetailViewModel(
             repository.getPlayerDetail(playerId).run {
                 onSuccess { data ->
                     _state.update {
-                        PlayerDetailState.Success(
+                        DetailState.Success(
                             detail = data,
-                            imageUrl = PlayerImageUrlAdapter.adapt(data.id)
+                            imageUrl = PlayersUrlAdapter.adapt(data.id)
                         )
                     }
                 }
-                onFailure { e -> _state.update { PlayerDetailState.Error(e) } }
+                onFailure { e -> _state.update { DetailState.Error(e) } }
             }
         }
     }
 
     fun retry() = fetchData()
-}
-
-/**
- * A sealed interface representing the state of a player detail screen.
- */
-sealed interface PlayerDetailState {
-
-    /**
-     * The state indicates that the player detail is loading.
-     */
-    object LOADING : PlayerDetailState
-
-    /**
-     * The state indicates that an error occurred while loading the player detail.
-     *
-     * @param error The error that occurred.
-     */
-    data class Error(val error: Throwable) : PlayerDetailState
-
-    /**
-     * The state indicates that the player detail was loaded successfully.
-     *
-     * @param detail The player detail.
-     * @param imageUrl The URL of the player's image.
-     */
-    data class Success(
-        val detail: PlayerDetail,
-        val imageUrl: String,
-    ) : PlayerDetailState
 }

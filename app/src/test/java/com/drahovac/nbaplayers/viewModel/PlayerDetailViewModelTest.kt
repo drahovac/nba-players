@@ -28,18 +28,24 @@ class PlayerDetailViewModelTest {
     fun `set initial loading state`() = runTest {
         setUpViewModel(dispatcher = StandardTestDispatcher())
 
-        val firstValue = viewModel.state.value
-
-        println(firstValue)
-        assertEquals(PlayerDetailState.LOADING, viewModel.state.value)
+        assertEquals(DetailState.LOADING, viewModel.state.value)
     }
 
     @Test
     fun `set success state on repository result success`() {
         setUpViewModel()
 
-        assertTrue(viewModel.state.value is PlayerDetailState.Success)
-        assertEquals(PLAYER_DETAIL, (viewModel.state.value as PlayerDetailState.Success).detail)
+        assertTrue(viewModel.state.value is DetailState.Success)
+        assertEquals(PLAYER_DETAIL, (viewModel.state.value as DetailState.Success).detail)
+    }
+
+    @Test
+    fun `set error state on repository result error`() {
+        val error = Throwable("test error")
+        setUpViewModel(Result.failure(error))
+
+        assertTrue(viewModel.state.value is DetailState.Error)
+        assertEquals(error, (viewModel.state.value as DetailState.Error).error)
     }
 
     @Test
@@ -61,7 +67,6 @@ class PlayerDetailViewModelTest {
 
         viewModel = PlayerDetailViewModel(PLAYER_ID, repository)
     }
-
 
     private companion object {
         const val PLAYER_ID = "3"

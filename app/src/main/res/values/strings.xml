@@ -11,4 +11,10 @@
     <string name="unknown">unknown:</string>
     <string name="player_image">Player image</string>
     <string name="team_details">Team details</string>
+    <string name="team_image">Team image</string>
+    <string name="team_full_name">Full name:</string>
+    <string name="team_division">Division:</string>
+    <string name="team_abbrevation">Abbrevation:</string>
+    <string name="team_city">City:</string>
+    <string name="team_conference">Conference:</string>
 </resources>
